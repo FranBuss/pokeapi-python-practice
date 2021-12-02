@@ -1,4 +1,5 @@
 import requests
+import webbrowser
 
 def pokemonsLimits():
     try:
@@ -49,28 +50,53 @@ def pokemon():
             'height' : pokemon_info[ 'height' ],
             'base_experience' : pokemon_info[ 'base_experience' ],
             'weight' : pokemon_info[ 'weight' ],
-            'species' : pokemon_info[ 'species' ][ 'name' ]
+            'types' : pokemon_info['types'][0]['type']['name']
         }
 
-        print(f"""
-        IMAGE: {info['image']} 
-        ID: {info['id']}
-        NAME: {info['name']}
-        HEIGTH: {info['height']}
-        BASE EXPERIENCE: {info['base_experience']}
-        WEIGHT: {info['weight']}
-        SPECIE: {info['species']}
-        """)
-    
+        template = f'''
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="stylesheet" href="styles.css">
+                <title>{info['name']}</title>
+            </head>
+            <body>
+                <h1>POKEMON</h1>
+                <div class="pokeimage">
+                <a href="https://pokemon.fandom.com/wiki/{info['name']}" target="_blank"><img src="{info['image']}"></a>
+                </div>
+                <div class="info">
+                    <p><strong>ID: </strong> {info['id']}</p>
+                    <p><strong>NAME: </strong>{info['name']}</p>
+                    <p><strong>HEIGTH: </strong>{info['height']}</p>
+                    <p><strong>BASE EXPERIENCE: </strong>{info['base_experience']}</p>
+                    <p><strong>WEIGHT: </strong>{info['weight']}</p>
+                    <p><strong>TYPE: </strong>{info['types']}</p>
+                </div>
+            </body>
+            </html>
+        '''
+
+        file = open("pokeapi.html","w")
+        file.write(template)
+        file.close()
 
 def options():
-    print("Enter the number of the option... 1-Pokemons Range, 2-Pokemon")
+    print("Enter the number of the option... 1-Pokemons Range, 2-Pokemon, 0-EXIT")
     op = int(input(">"))
     while op != 0:
+
         if op == 1:
             pokemonsLimits()
+
         elif op == 2:
             pokemon()
+            url = "pokeapi.html"
+            webbrowser.open_new_tab(url)
+
         elif op == 0:
             break
 
