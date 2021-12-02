@@ -47,9 +47,9 @@ def pokemon():
             "image" : pokemon_info["sprites"]["front_default"],
             "id": pokemon_info["id"],
             "name" : pokemon_info["name"],
-            'height' : pokemon_info[ 'height' ],
+            'height' : pokemon_info[ 'height' ] / 10,
             'base_experience' : pokemon_info[ 'base_experience' ],
-            'weight' : pokemon_info[ 'weight' ],
+            'weight' : pokemon_info[ 'weight' ] / 10,
             'types' : pokemon_info['types'][0]['type']['name']
         }
 
@@ -71,9 +71,9 @@ def pokemon():
                 <div class="info">
                     <p><strong>ID: </strong> {info['id']}</p>
                     <p><strong>NAME: </strong>{info['name']}</p>
-                    <p><strong>HEIGTH: </strong>{info['height']}</p>
+                    <p><strong>HEIGTH: </strong>{info['height']} m</p>
                     <p><strong>BASE EXPERIENCE: </strong>{info['base_experience']}</p>
-                    <p><strong>WEIGHT: </strong>{info['weight']}</p>
+                    <p><strong>WEIGHT: </strong>{info['weight']} Kg</p>
                     <p><strong>TYPE: </strong>{info['types']}</p>
                 </div>
             </body>
